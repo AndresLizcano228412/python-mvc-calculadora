@@ -194,66 +194,62 @@ class Calculator:
         return res
 
     def ex(self, x: float) -> float:
-        """Calcula el valor de e^x usando la serie de Taylor."""
-        termino = 1.0  # Primer término de la serie (x^0 / 0!)
+        termino = 1
         suma = termino
         n = 1
 
-        while n < 100:  # Limitar a 100 términos para precisión
-            termino = termino * x / n  # Calcular el siguiente término
+        while abs(termino) > 1e-12:
+            termino = termino * x / n
             suma += termino
             n += 1
 
         return suma
 
     def seno(self, grados: float) -> float:
-        """Calcula el seno de x (en radianes) usando la serie de Taylor."""
         import math
-        x = grados * (math.pi / 180)  # Convertir grados a radianes
-        termino = x  # Primer término de la serie (x^1 / 1!)
+        x = grados * (math.pi / 180)
+        termino = x
         suma = termino
         n = 1
 
-        while n < 100:  # Limitar a 100 términos para precisión
-            termino = -termino * x * x / ((2 * n) * (2 * n + 1))  # Calcular el siguiente término
+        while abs(termino) > 1e-12:
+            termino *= -x * x / ((2 * n) * (2 * n + 1))
             suma += termino
             n += 1
 
         return suma
 
     def coseno(self, grados: float) -> float:
-        """Calcula el coseno de x (en radianes) usando la serie de Taylor."""
         import math
-        x = grados * (math.pi / 180) 
-        termino = 1.0  # Primer término de la serie (x^0 / 0!)
+        x = grados * (math.pi / 180)
+        termino = 1
         suma = termino
         n = 1
 
-        while n < 100:  # Limitar a 100 términos para precisión
-            termino = -termino * x * x / ((2 * n - 1) * (2 * n))  # Calcular el siguiente término
+        while abs(termino) > 1e-12:
+            termino *= -x * x / ((2 * n - 1) * (2 * n))
             suma += termino
             n += 1
 
         return suma
 
     def arcotangente(self, x: float) -> float:
-        """Calcula la arcotangente de x usando la serie de Taylor."""
+
         if x < -1 or x > 1:
             raise ValueError("El valor de x debe estar en el rango [-1, 1] para una convergencia adecuada.")
 
-        termino = x  # Primer término de la serie (x^1 / 1)
+        termino = x
         suma = termino
         n = 1
 
-        while n < 100:  # Limitar a 100 términos para precisión
-            termino = -termino * x * x * (2 * n - 1) / (2 * n + 1)  # Calcular el siguiente término
+        while n < 100:
+            termino *= -x * x * (2 * n - 1) / (2 * n + 1)
             suma += termino
             n += 1
 
         return suma
 
     def leibniz_pi(self, iteraciones: int = 10000000) -> float:
-        """Calcula una aproximación de π usando la serie de Leibniz."""
         pi_aproximado = 0.0
         signo = 1.0
         for n in range(iteraciones):
