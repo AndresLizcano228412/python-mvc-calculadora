@@ -13,3 +13,21 @@ class Array:
                 indice += 1
             matriz.append(fila)
         return matriz
+
+    def suma_filas(self, matriz: list):
+        suma_filas = []
+        for fila in matriz:
+            total = sum(fila)
+            suma_filas.append(total)
+        return suma_filas
+
+    def suma_columnas(self, matriz: list):
+        filas = len(matriz)
+        columnas = len(matriz[0])
+        suma_columnas = []
+        for j in range(columnas):
+            total = 0
+            for i in range(filas):
+                total += matriz[i][j]
+            suma_columnas.append(total)
+        return suma_columnas
