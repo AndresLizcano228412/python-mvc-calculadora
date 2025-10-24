@@ -1,5 +1,11 @@
 class Array:
-    def vector(self, lista):
+    def vector(self, valor):
+        lista = []
+        self.valor = None
+        i = 1
+        for i in range(6):
+            lista.append(self.valor)
+            i += 1
         suma = sum(lista)
         return lista, suma
 
